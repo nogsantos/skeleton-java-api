@@ -1,0 +1,32 @@
+{
+  "name": "--pkg-name",
+  "version": "0.1.0",
+  "description": "--pkg-name api",
+  "scripts": {
+    "test": "./node_modules/.bin/serve ./build/reports/tests/test/ -p 8000 -o .",
+    "doc": "./node_modules/.bin/serve ./build/docs/javadoc/ -p 8000 -o ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/--username/--pkg-name.git"
+  },
+  "keywords": [
+    "Api",
+    "Java",
+    "Gradle",
+    "Spring boot"
+  ],
+  "author": {
+    "name": "--author-name",
+    "email": "--author-email",
+    "url": "--author-url"
+  },
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/--username/--pkg-name/issues"
+  },
+  "homepage": "https://github.com/--username/--pkg-name#readme",
+  "devDependencies": {
+    "serve": "^6.4.8"
+  }
+}

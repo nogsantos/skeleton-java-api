@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  tomcat_server:
+    build: tomcat
+    ports:
+      - "80:8080"
+    tty: true
+    restart: unless-stopped
+    links:
+      - "postgresql:database"
+    environment:
+      - PORT=8080
+      - DATABASE_HOST=postgresql
+      - DATABASE_PASSWORD=123456
+      - DATABASE_DB=java_api
+      - DB_USER=postgres
+      - DB_PORT=5432
+      - DB_URL=postgresql:5432/java_api
+    volumes:
+      - ./tomcat/war:/usr/local/tomcat/webapps:rw
+    command: ["catalina.sh", "run"]
+
+  postgresql:
+    image: nogsantos/postgres
+    restart: unless-stopped
+    ports:
+      - "5432:5432"
+    environment:
+      - DEBUG=false
+      - PG_PASSWORD=123456
+      - DB_NAME=java_api
+    volumes:
+      - ./postgres/scripts:/scripts:rw
+      - ./postgres/data:/var/lib/postgresql:rw
