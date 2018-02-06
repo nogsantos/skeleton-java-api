@@ -2,9 +2,9 @@
 
 echo Setting up
 
-export DB_URL="localhost:5432/java_api"
+export DB_URL="localhost:5432/--pkg-name'"
 
-export DB_TEST="localhost:5432/java_api_test"
+export DB_TEST="localhost:5432/--pkg-name_test"
 
 export DB_USER="postgres"
 

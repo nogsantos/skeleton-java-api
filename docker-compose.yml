@@ -12,11 +12,11 @@ services:
     environment:
       - PORT=8080
       - DATABASE_HOST=postgresql
-      - DATABASE_PASSWORD=123456
-      - DATABASE_DB=java_api
+      - DATABASE_DB=--pkg-name
       - DB_USER=postgres
+      - DB_PASSWORD=123456
       - DB_PORT=5432
-      - DB_URL=postgresql:5432/java_api
+      - DB_URL=postgresql:5432/--pkg-name
     volumes:
       - ./tomcat/war:/usr/local/tomcat/webapps:rw
     command: ["catalina.sh", "run"]
@@ -29,7 +29,7 @@ services:
     environment:
       - DEBUG=false
       - PG_PASSWORD=123456
-      - DB_NAME=java_api
+      - DB_NAME=--pkg-name
     volumes:
       - ./postgres/scripts:/scripts:rw
       - ./postgres/data:/var/lib/postgresql:rw
