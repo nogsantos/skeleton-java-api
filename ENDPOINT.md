@@ -1,80 +1,8 @@
-# Endpoints
+# Endpoints Swagger
 
-## GET
+- [Example 1](https://dzone.com/articles/usage-of-swagger-20-in-spring-boot-applications-to)
+- [Example 2](https://www.baeldung.com/swagger-2-documentation-for-spring-rest-api)
 
-### Return
+### Swagger UI
 
-Status: 200
-
-```json
-
-```
-
-## GET/{id}
-
-### Params
-
-### Return
-
-Status: 201
-
-```json
-
-```
-
-## POST
-
-### Params
-
-- Body json/data
-
-### Fields
-
-### Send
-
-Status: 201
-
-```json
-
-```
-
-### Return
-
-```json
-```
-
-## PUT/{id}
-
-### Params
-
-### Fields
-
-### Send
-
-Status: 201
-
-```json
-
-```
-
-### Return
-
-```json
-
-```
-
-## DELET/{id}
-
-### Params
-
-### Send
-
-Status: 201
-
-### Return
-
-```json
-{
-
-}
-```
+[http://localhost:8080/swagger-ui.html#/](http://localhost:8080/swagger-ui.html#/)

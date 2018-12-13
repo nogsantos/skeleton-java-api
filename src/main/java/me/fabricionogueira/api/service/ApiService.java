@@ -12,13 +12,14 @@ public class ApiService {
 	 *
 	 * @param <T>
 	 *
-	 * @param String key
-	 * @param T body
+	 * @param key
+	 * @param body
 	 * @return Hashtable<String, T>
 	 */
 	public static <T> Hashtable<String, T> response(String key, T body) {
-		Hashtable<String, T> output = new Hashtable<String, T>();
+		Hashtable<String, T> output = new Hashtable<>();
 		output.put(key, body);
 		return output;
 	}
+
 }
