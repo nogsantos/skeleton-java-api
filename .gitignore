@@ -32,3 +32,6 @@ tomcat/war/treasyapi-0.1.0/
 tomcat/war/*.war
 postgres/data/
 *-cache/
+
+.idea/
+.vscode/

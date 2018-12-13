@@ -27,6 +27,6 @@
   },
   "homepage": "https://github.com/--username/--pkg-name#readme",
   "devDependencies": {
-    "serve": "^6.4.8"
+    "serve": ">=7.0.0"
   }
 }
