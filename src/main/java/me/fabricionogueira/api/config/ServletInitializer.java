@@ -1,5 +1,6 @@
-package me.fabricionogueira.api;
+package me.fabricionogueira.api.config;
 
+import me.fabricionogueira.api.ApiApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
