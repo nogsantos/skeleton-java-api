@@ -11,4 +11,15 @@ spring:
     database-platform: org.hibernate.dialect.PostgreSQL9Dialect
     generate-ddl: false
     show-sql: true
-    format-sql: true
+  flyway:
+    password: ${DB_PASSWORD}
+    url: ${DATABASE_URL:jdbc:postgresql://${DB_URL}}
+    user: ${DB_USER}
+    baseline-on-migrate: true
+    enabled: true
+    encoding: UTF-8
+security:
+  oauth2:
+    client:
+      client-id: ${OAUTH_CLIENT:client-id}
+      client-secret: ${OAUTH_SECRET:secret-id}
