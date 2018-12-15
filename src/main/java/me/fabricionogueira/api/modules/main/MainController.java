@@ -41,6 +41,14 @@ public class MainController {
 	@ApiResponses(value = {
 		@ApiResponse(code = 200, message = "Request Success")
 	})
+	@ApiImplicitParams({
+		@ApiImplicitParam(
+			name = "Authorization",
+			value = "Authorization token",
+			required = true,
+			paramType = "header"
+		)
+	})
 	public ResponseEntity<String> hello(
 		@RequestParam(required = true)
 		@ApiParam(value = "Some string value")
