@@ -49,11 +49,7 @@ public class MainController {
 			paramType = "header"
 		)
 	})
-	public ResponseEntity<String> hello(
-		@RequestParam(required = true)
-		@ApiParam(value = "Some string value")
-			String param) {
-
+	public ResponseEntity<String> hello(@RequestParam(required = true) @ApiParam(value = "Some string value") String param) {
 		return response.ok("Hello " + param);
 	}
 }
