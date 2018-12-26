@@ -11,10 +11,23 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.A
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
+
+import static org.springframework.http.HttpMethod.*;
 
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+
+	static final String CLIEN_ID = "devglan-client";
+	static final String CLIENT_SECRET = "$2a$04$e/c1/RfsWuThaWFCrcCuJeoyvwCV0URN/6Pn9ZFlrtIWaU/vj/BfG";
+	static final String GRANT_TYPE = "password";
+	static final String AUTHORIZATION_CODE = "authorization_code";
+	static final String REFRESH_TOKEN = "refresh_token";
+	static final String IMPLICIT = "implicit";
+	static final String SCOPE_READ = "read";
+	static final String SCOPE_WRITE = "write";
+	static final String TRUST = "trust";
 
 	private static final Integer ACCESS_TOKEN_VALIDITY_IN_SECONDS = 60 * 60 * 24;
 	private static final Integer REFRESH_TOKEN_VALIDITY_IN_SECONDS = 60 * 60 * 24;
@@ -27,9 +40,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
 	private AuthenticationManager authenticationManager;
 
+	private TokenStore tokenStore;
+
 	@Autowired
-	public AuthorizationServerConfig(AuthenticationManager authenticationManager) {
+	public AuthorizationServerConfig(AuthenticationManager authenticationManager, TokenStore tokenStore) {
 		this.authenticationManager = authenticationManager;
+		this.tokenStore = tokenStore;
 	}
 
 	@Override
@@ -41,20 +57,22 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	}
 
 	@Override
-	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-		clients.inMemory()
-			.withClient(client)
-			.secret(new BCryptPasswordEncoder().encode(secret))
-			.authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
-			.scopes("read", "write", "trust")
-			.resourceIds("oauth2-resource")
-			.accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_IN_SECONDS)
-			.refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_IN_SECONDS);
+	public void configure(ClientDetailsServiceConfigurer configurer) throws Exception {
+
+		configurer
+			.inMemory()
+			.withClient(CLIEN_ID)
+			.secret(CLIENT_SECRET)
+			.authorizedGrantTypes(GRANT_TYPE, AUTHORIZATION_CODE, REFRESH_TOKEN, IMPLICIT )
+			.scopes(SCOPE_READ, SCOPE_WRITE, TRUST)
+			.accessTokenValiditySeconds(ACCESS_TOKEN_VALIDITY_IN_SECONDS).
+			refreshTokenValiditySeconds(REFRESH_TOKEN_VALIDITY_IN_SECONDS);
 	}
 
 	@Override
 	public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-		endpoints.authenticationManager(authenticationManager)
-			.allowedTokenEndpointRequestMethods(HttpMethod.GET, HttpMethod.POST);
+		endpoints
+			.tokenStore(tokenStore)
+			.authenticationManager(authenticationManager);
 	}
 }
