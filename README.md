@@ -14,7 +14,7 @@ Para preparar o ambiente de desenvolvimento, é necessário gerar as variáveis 
 
 ##### Variáveis de ambiente
 
-Executar
+##### Executar
 
 ```shell
 $ ./setup.sh
@@ -23,6 +23,22 @@ $ ./setup.sh
 Ao final do processo, além da impressão das variáveis geradas no console, o arquivo `.env` será gerado na raiz do projeto.
 
 > Ps.: As variáveis de sessão serão criadas apenas para a sessão do terminal em questão.
+
+##### Export no terminal
+
+Exportar todas as variáveis de ambiente geradas, para a sessão atual do terminal
+
+Com [Fish shell](https://fishshell.com/)
+
+```shell
+$ export (cat .env)
+```
+
+Terminal sem fish
+
+```shell
+$ export $(cat .env)
+``` 
  
 ##### Dependências do projeto
 
