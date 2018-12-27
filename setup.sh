@@ -1,27 +1,59 @@
 #!/bin/bash
 
-echo Setting up
+function export_env() {
+	clear
 
-export DB_URL="localhost:5432/--pkg-name'"
+	printf "Setting up environment system... \n\n"
 
-export DB_TEST="localhost:5432/--pkg-name_test"
+	export DB_URL="localhost:5432/--pkg-name"
+	export DB_TEST="localhost:5432/--pkg-name_test"
+	export DB_USER="postgres"
+	export DB_PASSWORD=$(uuidgen)
+	export APPLICATION_NAME="--pkg-name"
+	export SERVER_PORT="8090"
+	export JWT_CLIENT_ID="oauth-token--pkg-name"
+	export JWT_CLIENT_SECRET=$(uuidgen)
+}
 
-export DB_USER="postgres"
+function show_created_env() {
+	printf "Environment values: \n\n"
+	echo DB_URL=${DB_URL}
+	echo DB_TEST=${DB_TEST}
+	echo DB_USER=${DB_USER}
+	echo DB_PASSWORD=${DB_PASSWORD}
+	echo APPLICATION_NAME=${APPLICATION_NAME}
+	echo SERVER_PORT=${SERVER_PORT}
+	echo JWT_CLIENT_ID=${JWT_CLIENT_ID}
+	echo JWT_CLIENT_SECRET=${JWT_CLIENT_SECRET}
+}
 
-export DB_PASSWORD="123456"
+function create_env_file() {
+cat > .env <<EOF
+DB_URL=${DB_URL}
+DB_TEST=${DB_TEST}
+DB_USER=${DB_USER}
+DB_PASSWORD=${DB_PASSWORD}
+APPLICATION_NAME=${APPLICATION_NAME}
+SERVER_PORT=${SERVER_PORT}
+JWT_CLIENT_ID=${JWT_CLIENT_ID}
+JWT_CLIENT_SECRET=${JWT_CLIENT_SECRET}
+EOF
+	printf ".env file created. \n\n"
+}
 
-echo Done!
+function check_env_file() {
+	if [[ -e ".env" ]]; then
+		rm .env
+		printf "\n\nCurrent .env file deleted. \n\n"
+	fi
 
-echo Database: $DB_URL
-echo Database Teste:  $DB_TEST
-echo Database User: $DB_USER
-echo Database Password: $DB_PASSWORD
+	create_env_file
 
-# echo Building...
+	printf "Done! \n\n"
+}
 
-# if source ./gradlew init; then
-# 	echo Success Builded
-# else
-# 	echo Build Failed
-# fi
+export_env
 
+show_created_env
+
+check_env_file

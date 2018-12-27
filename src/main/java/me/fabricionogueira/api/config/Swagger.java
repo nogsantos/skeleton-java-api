@@ -28,22 +28,24 @@ public class Swagger {
 			.paths(PathSelectors.any())
 			.build()
 			.apiInfo(apiInfo())
-			.useDefaultResponseMessages(false)
-			;
+			.useDefaultResponseMessages(false);
 
 	}
 
 	private ApiInfo apiInfo() {
 		return new ApiInfo(
-			"Minha API",
+			"My API",
 			"Some custom description of API.",
 			"v1",
-			"Terms of service",
+			null,
 			new Contact(
 				"Fabricio Nogueira",
 				"https://fabricionogueira.me",
 				"nogsantos@gmail.com"
 			),
-			"License", "MIT", Collections.emptyList());
+			null,
+			null,
+			Collections.emptyList()
+		);
 	}
 }

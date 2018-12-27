@@ -14,37 +14,21 @@ Para preparar o ambiente de desenvolvimento, é necessário gerar as variáveis 
 
 ##### Variáveis de ambiente
 
-```text
-- DATABASE_URL=localhost:5432/--pkg-name
-- DATABASE_USER=postgres
-- DATABASE_PASSWORD=123456
+Executar
 
-Para testes
-
-- DATABASE_TEST_URL=localhost:5432/--pkg-name_test
+```shell
+$ ./setup.sh
 ```
 
+Ao final do processo, além da impressão das variáveis geradas no console, o arquivo `.env` será gerado na raiz do projeto.
+
+> Ps.: As variáveis de sessão serão criadas apenas para a sessão do terminal em questão.
+ 
 ##### Dependências do projeto
 
 ```text
 ./gradle build
 ```
-
-Para gerar as variáveis, basta apenas executar o comando:
-
-##### Mac
-
-```shell
-./setup.sh
-```
-
-##### Linux
-
-```shell
-. ./setup.sh
-```
-
-> Ps.: As variáveis de sessão serão criadas apenas para a sessão do terminal em questão.
 
 ### Iniciar para desenvolvimento
 
@@ -64,22 +48,11 @@ Compila e testa o projeto
 ./gradlew build
 ```
 
-Executar apenas os testes
+Executar apenas os testes pelo spring boot
 
 ```shell
 ./gradlew test --debug
 ```
-
-#### Opcional
-
-> Para visualizar os resultados dos testes e a documentação (javadoc). Instale os pacotes com o npm, (nesse caso, é necessário que o node esteja instalado e configurado no computador).
->
-> Rode o comando ```npm install``` para instalar as dependências node
->
-> Após realizar o build para o teste ```./gradlew test``` o relatório pode ser visualizada com o comando ```npm run test```
->
-> Após realizar o build para a documentação ```./gradlew javadoc``` o site pode ser visualizada com o comando ```npm run doc```
->
 
 ## Available Tasks
 
@@ -108,17 +81,17 @@ Todas as tarefas devem ser executadas à partir da base do projeto ```./```
 
 ### Help tasks
 
-- ```buildEnvironment``` - Displays all buildscript dependencies declared in root project 'treasyapi'.
-- ```components``` - Displays the components produced by root project 'treasyapi'. [incubating]
-- ```dependencies``` - Displays all dependencies declared in root project 'treasyapi'.
-- ```dependencyInsight``` - Displays the insight into a specific dependency in root project 'treasyapi'.
-- ```dependencyManagement``` - Displays the dependency management declared in root project 'treasyapi'.
-- ```dependentComponents``` - Displays the dependent components of components in root project 'treasyapi'. [incubating]
+- ```buildEnvironment``` - Displays all buildscript dependencies declared in root project '--pkg-name'.
+- ```components``` - Displays the components produced by root project '--pkg-name'. [incubating]
+- ```dependencies``` - Displays all dependencies declared in root project '--pkg-name'.
+- ```dependencyInsight``` - Displays the insight into a specific dependency in root project '--pkg-name'.
+- ```dependencyManagement``` - Displays the dependency management declared in root project '--pkg-name'.
+- ```dependentComponents``` - Displays the dependent components of components in root project '--pkg-name'. [incubating]
 - ```help``` - Displays a help message.
-- ```model``` - Displays the configuration model of root project 'treasyapi'. [incubating]
-- ```projects``` - Displays the sub-projects of root project 'treasyapi'.
-- ```properties``` - Displays the properties of root project 'treasyapi'.
-- ```tasks``` - Displays the tasks runnable from root project 'treasyapi'.
+- ```model``` - Displays the configuration model of root project '--pkg-name'. [incubating]
+- ```projects``` - Displays the sub-projects of root project '--pkg-name'.
+- ```properties``` - Displays the properties of root project '--pkg-name'.
+- ```tasks``` - Displays the tasks runnable from root project '--pkg-name'.
 
 ### Verification tasks
 
@@ -130,59 +103,3 @@ Todas as tarefas devem ser executadas à partir da base do projeto ```./```
 - ```Pattern: clean<TaskName>```: Cleans the output files of a task.
 - ```Pattern: build<ConfigurationName>```: Assembles the artifacts of a configuration.
 - ```Pattern: upload<ConfigurationName>```: Assembles and uploads the artifacts belonging to a configuration.
-
-## Deploy Tomcat 9 com o Docker
-
-Para criar o ambiente de produção, utilizar o [docker](https://www.docker.com/community-edition#/download) com tomcat 9 e, para isso, o docker precisa estar instalado e configurado no sistema.
-
-### Modo principal
-
-Apenas executar o comando ```docker-compose up -d```
-
-### Modo alternativo
-
-- ```docker build --tag 'treasyapi_tomcat_server' tomcat/.``` Para instalação do container.
-- ```docker run -it -p 80:8080 treasyapi_tomcat_server /bin/bash``` Para execução do container para configurações do tomcat.
-
-## Edição dos usuários do tomcat
-
-> Caso julgue necessário, realize a instalação do vim após subir o container para realizar as configurações necessárias.
-> ```apt-get update && apt-get install vim -y```
-
-Para editar ou criar usuários para administração do tomcat, edite o arquivo ```vim conf/tomcat-users.xml```:
-
-```xml
-    <role rolename="manager"/>
-    <role rolename="manager-gui"/>
-    <role rolename="admin-gui"/>
-    <user username="<usuario>" password="<senha>" roles="manager,manager-gui,admin-gui"/>
-```
-
-Se for necessário que se disponibilize o acesso ao manager do tomcat externamente, deve ser configurado, além do usuário, o contexto para o acesso.
-
-1. Parar o tomcat ```./bin/catalina.sh stop```
-1. Inicializar o tomcat para gerar os arquivos ```./bin/catalina.sh start```
-2. Criar o arquivo ```manager.xml``` em ```conf/Catalina/localhost/```
-
-```shell
-vim conf/Catalina/localhost/manager.xml
-```
-
-Conteúdo do arquivo
-
-```xml
-<Context privileged="true" antiResourceLocking="false" docBase="${catalina.home}/webapps/manager">
-    <Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="^.*$" />
-</Context>
-```
-3. Parar ```./bin/catalina.sh stop``` iniciar novamente ```./bin/catalina.sh start```
-4. Acessar pelo navegador para testar ```http://endereco```
-
-Após realizar as configurações necessários, para gravá-las, é necessário realizar o commit da imagem, para isso, siga os seguintes passos:
-
-1. Saia do container utilizando simultaneamente as teclas ```ctrl + p + q```
-2. ```docker ps``` para visualizar o container id
-3. ```docker commit [container_id] treasyapi_tomcat_server``` para realizar o commit
-4. ```docker stop [container_id]``` para finalizar o container
-
-Com todas as edições e configurações necessárias realizadas, para subir o container: ```docker-compose up -d```
