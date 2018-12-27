@@ -2,6 +2,7 @@ package me.fabricionogueira.api.config.security;
 
 import com.google.common.collect.Lists;
 import me.fabricionogueira.api.modules.user.UserRepository;
+import me.fabricionogueira.api.modules.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -52,8 +53,10 @@ public class WebConfigSecurityAdapter extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	@Transactional
-	public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository userRepository) throws Exception {
-		builder.userDetailsService(userRepository::findOneByEmail).passwordEncoder(passwordEncoder());
+	public void authenticationManager(AuthenticationManagerBuilder builder, UserService userRepository) throws Exception {
+		builder
+			.userDetailsService(userRepository::findOneByEmail)
+			.passwordEncoder(passwordEncoder());
 	}
 
 	@Override

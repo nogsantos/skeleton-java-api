@@ -34,15 +34,8 @@ public class AuthController {
 
 	@GetMapping("whoAmI")
 	public Object whoAmI() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-		if (authentication.getPrincipal() instanceof String) {
-			return authentication.getPrincipal();
-		}
-
-		User user = (User) authentication.getPrincipal();
-
-		return userMapper.toDefaultValues(user);
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		return auth.getPrincipal();
 	}
 
 	@GetMapping("logout")
