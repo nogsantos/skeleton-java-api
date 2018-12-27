@@ -11,7 +11,7 @@ function export_env() {
 	export DB_PASSWORD=$(uuidgen)
 	export APPLICATION_NAME="--pkg-name"
 	export SERVER_PORT="8090"
-	export JWT_CLIENT_ID="oauth-token--pkg-name"
+	export JWT_CLIENT_ID="oauth-token_--pkg-name"
 	export JWT_CLIENT_SECRET=$(uuidgen)
 }
 
