@@ -36,3 +36,4 @@ postgres/data/
 .idea/
 .vscode/
 out/
+.env

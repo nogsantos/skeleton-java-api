@@ -25,5 +25,5 @@ server:
 security:
   oauth2:
     client:
-      client-id: ${OAUTH_CLIENT:client-id}
-      client-secret: ${OAUTH_SECRET:secret-id}
+      client-id: ${JWT_CLIENT_ID}
+      client-secret: ${JWT_CLIENT_SECRET}

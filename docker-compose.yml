@@ -1,4 +1,4 @@
-version: '2'
+version: '3'
 
 services:
   postgresql:
@@ -9,7 +9,7 @@ services:
       - "5432:5432"
     environment:
       - DEBUG=false
-      - PG_PASSWORD=123456
+      - PG_PASSWORD=${DB_PASSWORD}
       - DB_NAME=--pkg-name
     volumes:
       - ./postgres/scripts:/scripts:rw
