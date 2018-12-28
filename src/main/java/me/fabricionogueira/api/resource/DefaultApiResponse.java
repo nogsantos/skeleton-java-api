@@ -1,5 +1,8 @@
 package me.fabricionogueira.api.resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
@@ -14,16 +17,8 @@ import static org.springframework.http.HttpStatus.*;
 @Component
 public class DefaultApiResponse {
 
-
-	private HttpHeaders responseHeaders;
-
-	/**
-	 * Header
-	 */
-	private DefaultApiResponse() {
-		this.responseHeaders = new HttpHeaders();
-		this.responseHeaders.set("API", "Fabricio Nogueira");
-	}
+	@Value("${spring.application.name}")
+	private String applicationName;
 
 	/**
 	 * Generic response for collections.
@@ -31,7 +26,7 @@ public class DefaultApiResponse {
 	 * @param <E> Element
 	 */
 	public <E> ResponseEntity<Collection<E>> ok(Collection<E> entyties) {
-		return new ResponseEntity<>(entyties, this.responseHeaders, OK);
+		return new ResponseEntity<>(entyties, getHeaders(), OK);
 	}
 
 	/**
@@ -41,29 +36,17 @@ public class DefaultApiResponse {
 	 * @param <T> Body values of type
 	 */
 	public <T> ResponseEntity<T> ok(T body) {
-		return new ResponseEntity<>((T) body, this.responseHeaders, OK);
+		return new ResponseEntity<>((T) body, getHeaders(), OK);
 	}
 
 	/**
-	 * Not found
-	 */
-	public <T> ResponseEntity<T> notFound() {
-		return new ResponseEntity<>(null, this.responseHeaders, NOT_FOUND);
-	}
-
-	/**
-	 * Unauthorized
-	 */
-	public <T> ResponseEntity<T> unauthorized() {
-		return new ResponseEntity<>(null, this.responseHeaders, UNAUTHORIZED);
-	}
-
-	/**
-	 * When request fail
+	 * Set default headers to response
 	 *
-	 * @param <T> Type
+	 * @return HttpHeaders
 	 */
-	public <T> ResponseEntity<T> requestFail() {
-		return new ResponseEntity<>(null, this.responseHeaders, SERVICE_UNAVAILABLE);
+	private HttpHeaders getHeaders() {
+		HttpHeaders responseHeaders = new HttpHeaders();
+		responseHeaders.set("API", applicationName);
+		return responseHeaders;
 	}
 }
