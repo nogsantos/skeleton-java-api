@@ -66,6 +66,7 @@ dependencies {
 	apt 'org.projectlombok:lombok:1.18.4'
 	compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
 	apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
+	compile group: 'org.json', name: 'json', version: '20180813'
 }
 
 sourceSets {
