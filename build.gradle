@@ -67,8 +67,22 @@ dependencies {
 	compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
 	apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
 	compile group: 'org.json', name: 'json', version: '20180813'
+	// Tests
+	testImplementation('org.junit.jupiter:junit-jupiter-api:5.1.0')
+	testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.1.0')
+	testCompile("org.mockito:mockito-core:2.+")
+	testCompile group: 'org.hamcrest', name: 'hamcrest-all', version: '1.3'
+	testImplementation('org.junit.jupiter:junit-jupiter-api:5.1.0')
+	testRuntimeOnly(
+		'org.junit.jupiter:junit-jupiter-engine:5.1.0',
+		'org.junit.vintage:junit-vintage-engine:5.1.0'
+	)
 }
 
 sourceSets {
 	main.java.srcDirs += "build/generated/source/apt/main"
+}
+
+test {
+	useJUnitPlatform()
 }
