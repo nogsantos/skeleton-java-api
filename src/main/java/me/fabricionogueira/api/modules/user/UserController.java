@@ -7,8 +7,12 @@ import io.swagger.annotations.ApiResponses;
 import me.fabricionogueira.api.modules.user.dto.UserDefault;
 import me.fabricionogueira.api.modules.user.exceptions.UserException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
@@ -30,8 +34,8 @@ public class UserController {
 	})
 	@GetMapping("/")
 	@PreAuthorize("hasAuthority('USER') OR hasAuthority('ADMIN') OR hasAuthority('SUPER_ADMIN')")
-	public UserDefault getDetails(@RequestHeader String token) throws UserException {
-		return service.getDetailsByToken(token);
+	public ResponseEntity<UserDefault> getDetails() throws UserException {
+		return service.getDetailsByToken();
 	}
 
 	@ApiOperation("Recovery user password by email address")
