@@ -1,6 +1,12 @@
 spring:
   application:
     name: ${APPLICATION_NAME}
+    description: ${APPLICATION_DESCRIPTION}
+    version: ${APPLICATION_VERSION}
+    contact:
+      name: ${CONTACT_NAME}
+      site: ${CONTACT_SITE}
+      email: ${CONTACT_EMAIL}
   datasource:
     url: ${DATABASE_URL:jdbc:postgresql://${DB_URL}}
     username: ${DB_USER}
