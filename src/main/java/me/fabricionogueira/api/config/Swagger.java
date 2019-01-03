@@ -1,5 +1,6 @@
 package me.fabricionogueira.api.config;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,6 +21,25 @@ import static com.google.common.collect.Lists.newArrayList;
 @Configuration
 @EnableSwagger2
 public class Swagger {
+
+	@Value("${spring.application.name}")
+	private String applicationName;
+
+	@Value("${spring.application.description}")
+	private String applicationDescription;
+
+	@Value("${spring.application.version}")
+	private String applicationVersion;
+
+	@Value("${spring.application.contact.name}")
+	private String applicationContactName;
+
+	@Value("${spring.application.contact.site}")
+	private String applicationContactSite;
+
+	@Value("${spring.application.contact.email}")
+	private String applicationContactEmail;
+
 	@Bean
 	public Docket api() {
 		return new Docket(DocumentationType.SWAGGER_2)
@@ -34,14 +54,14 @@ public class Swagger {
 
 	private ApiInfo apiInfo() {
 		return new ApiInfo(
-			"My API",
-			"Some custom description of API.",
-			"v1",
+			applicationName,
+			applicationDescription,
+			applicationVersion,
 			null,
 			new Contact(
-				"Fabricio Nogueira",
-				"https://fabricionogueira.me",
-				"nogsantos@gmail.com"
+				applicationContactName,
+				applicationContactSite,
+				applicationContactEmail
 			),
 			null,
 			null,

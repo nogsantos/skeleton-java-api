@@ -2,6 +2,7 @@ package me.fabricionogueira.api.config.security;
 
 import com.google.common.collect.Lists;
 import me.fabricionogueira.api.modules.user.UserRepository;
+import me.fabricionogueira.api.modules.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -24,6 +25,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancer;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.web.cors.CorsConfiguration;
@@ -52,8 +54,10 @@ public class WebConfigSecurityAdapter extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	@Transactional
-	public void authenticationManager(AuthenticationManagerBuilder builder, UserRepository userRepository) throws Exception {
-		builder.userDetailsService(userRepository::findOneByEmail).passwordEncoder(passwordEncoder());
+	public void authenticationManager(AuthenticationManagerBuilder builder, UserService userRepository) throws Exception {
+		builder
+			.userDetailsService(userRepository::findOneByEmail)
+			.passwordEncoder(passwordEncoder());
 	}
 
 	@Override
@@ -89,11 +93,6 @@ public class WebConfigSecurityAdapter extends WebSecurityConfigurerAdapter {
 	}
 
 	@Bean
-	public TokenStore tokenStore() {
-		return new JwtTokenStore(accessTokenConverter());
-	}
-
-	@Bean
 	public TokenEnhancerChain tokenEnhancerChain() {
 		final TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
 		tokenEnhancerChain.setTokenEnhancers(Lists.newArrayList(new MyTokenEnhancer(), accessTokenConverter()));
@@ -115,6 +114,11 @@ public class WebConfigSecurityAdapter extends WebSecurityConfigurerAdapter {
 		public OAuth2AccessToken enhance(OAuth2AccessToken accessToken, OAuth2Authentication authentication) {
 			return accessToken;
 		}
+	}
+
+	@Bean
+	public InMemoryTokenStore tokenStore() {
+		return new InMemoryTokenStore();
 	}
 
 	@Bean

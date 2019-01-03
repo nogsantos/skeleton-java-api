@@ -4,6 +4,7 @@ import io.swagger.annotations.*;
 import me.fabricionogueira.api.resource.DefaultApiResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -49,6 +50,7 @@ public class MainController {
 			paramType = "header"
 		)
 	})
+	@PreAuthorize("hasAuthority('SUPER_ADMIN')")
 	public ResponseEntity<String> hello(@RequestParam(required = true) @ApiParam(value = "Some string value") String param) {
 		return response.ok("Hello " + param);
 	}

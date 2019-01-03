@@ -1,60 +1,40 @@
 package me.fabricionogueira.api.modules.auth;
 
-import me.fabricionogueira.api.modules.user.User;
-import me.fabricionogueira.api.modules.user.UserMapper;
-import me.fabricionogueira.api.modules.user.exceptions.UserNotFound;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
+import me.fabricionogueira.api.modules.auth.execeptions.AuthException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.provider.authentication.OAuth2AuthenticationDetails;
-import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.transaction.Transactional;
 
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.OK;
-
 @RestController
-@RequestMapping("auth")
+@RequestMapping("oauth")
 @Transactional
+@PreAuthorize("hasAuthority('USER') OR hasAuthority('ADMIN') OR hasAuthority('SUPER_ADMIN')")
 public class AuthController {
 
-	private ConsumerTokenServices tokenServices;
-	private UserMapper userMapper;
+	final private AuthService service;
 
 	@Autowired
-	public AuthController(ConsumerTokenServices tokenServices, UserMapper userMapper) {
-		this.tokenServices = tokenServices;
-		this.userMapper = userMapper;
+	public AuthController(AuthService service) {
+		this.service = service;
 	}
 
-	@GetMapping("whoAmI")
-	public Object whoAmI() {
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
-		if (authentication.getPrincipal() instanceof String) {
-			return authentication.getPrincipal();
-		}
-
-		User user = (User) authentication.getPrincipal();
-
-		return userMapper.toDefaultValues(user);
-	}
-
+	@ApiOperation("Logout user, invalidating the token")
+	@ApiResponses({
+		@ApiResponse(code = 200, message = "Successfully sent"),
+		@ApiResponse(code = 400, message = "Bad request"),
+		@ApiResponse(code = 410, message = "Processing request error"),
+		@ApiResponse(code = 404, message = "Not found")
+	})
 	@GetMapping("logout")
-	public ResponseEntity<?> logout() {
-		Object details = SecurityContextHolder.getContext().getAuthentication().getDetails();
-
-		if (details instanceof OAuth2AuthenticationDetails) {
-			return ResponseEntity.status(OK).body(
-				tokenServices.revokeToken(((OAuth2AuthenticationDetails) details).getTokenValue())
-			);
-		}
-
-		return ResponseEntity.status(BAD_REQUEST).body(new UserNotFound());
+	public ResponseEntity<String> logout() throws AuthException {
+		return service.logout();
 	}
 }
