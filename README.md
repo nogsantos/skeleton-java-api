@@ -1,5 +1,7 @@
 # --pkg-name
 
+[![CircleCI](https://circleci.com/gh/nogsantos/skeleton-java-api.svg?style=svg)](https://circleci.com/gh/nogsantos/skeleton-java-api)
+
 #### Importante
 
 >
