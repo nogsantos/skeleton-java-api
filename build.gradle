@@ -67,6 +67,7 @@ dependencies {
 	compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
 	apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
 	compile group: 'org.json', name: 'json', version: '20180813'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
 	// Tests
 	testImplementation('org.junit.jupiter:junit-jupiter-api:5.1.0')
 	testRuntimeOnly('org.junit.jupiter:junit-jupiter-engine:5.1.0')
