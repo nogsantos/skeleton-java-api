@@ -1,47 +1,218 @@
 # --pkg-name
 
 [![CircleCI](https://circleci.com/gh/nogsantos/skeleton-java-api.svg?style=svg)](https://circleci.com/gh/nogsantos/skeleton-java-api)
-
-#### Importante
-
->
-> O ambiente de desenvolvimento foi configurado em sistema com base Unix, Mac e Linux, ou seja, pode haver divergência caso seja utilizado o Windows para desenvovlimento, dessa forma, caso seja extremamente necessário que se desenvolva nessa plataforma, as configurações podem variar, porém, não pude fazer os testes e nem tenho a pretenção de fazê-los para desenvolvimento em Windows.
->
-> Dessa forma, todas as configurações foram realizadas utilizando a linha de comando.
->
-
-## Setup
-
-Para preparar o ambiente, é necessário gerar as variáveis de ambiente para a conexão com o banco de dados e baixar as dependências do projeto
-
-##### Variáveis de ambiente
-
-##### Executar
-
-```bash
-$ ./setup.sh
-```
-
-Ao final do processo, além da impressão das variáveis geradas no console, o arquivo `.env` será gerado na raiz do projeto.
-
-> Ps.: As variáveis de sessão serão criadas apenas para a sessão do terminal em questão.
-
-##### Export no terminal
-
-Exportar todas as variáveis de ambiente geradas, para a sessão atual do terminal
-
-Com [Fish shell](https://fishshell.com/)
-
-```shell
-$ export (cat .env)
-```
-
-Terminal sem fish
-
-```bash
-$ export $(cat .env)
-``` 
  
-## Configurações
+Projeto base para construções de API RestFull utilizando Spring boot versão 2 como framework principal.
 
-Todas as documentações para a configuração, tarefas e setup do projeto estão disponíveis em [Configurações](./docs/CONF.md)
+### Command Line Interface
+
+Para realizar a substituição dos parâmetros utilizados na definição do projeto, utilize [CLI](nogsantoscli) selecionando a opção `❯ Java for RestFull API ` 
+
+![](https://res.cloudinary.com/nogsantos/image/upload/v1546616696/Screenshot_from_2019-01-04_13-39-00_msw0et.png)
+## Configurações e Setup
+
+Todas as documentações para a configuração das bibliotecas, tarefas e setup do projeto estão disponíveis em [docs/conf](./docs/CONF.md) 
+
+## Tecnologias
+
+O projeto base utiliza as seguintes bibliotecas e frameworks
+
+#### Core e build
+
+<table width="100%">
+  <tbody>
+    <tr>
+      <th align="center">Spring boot</th>
+      <th align="center">Gradle</th>      
+    </tr>
+    <tr>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546619148/java-skeleton/spring-boot-2.png"
+             alt="Spring boot" />      	
+		</td>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546619391/java-skeleton/gradle-logo-png-transparent.png"
+		   alt="Gradle" />     
+      </td>      
+    </tr>
+    <tr>			
+		<td></td>
+		<td>
+			<ul>
+				<li>
+					<a href="./docs/GRADLE.md">Referência</a>
+				</li>				
+			</ul>    		
+		</td>    
+	</td>
+  </tbody>
+</table>
+
+#### Banco de dados
+
+<table width="100%">
+  <tbody>
+    <tr>
+      <th align="center">Postgres</th>      
+      <th align="center">Persistence API</th>      
+      <th align="center">Flywaydb</th>      
+    </tr>
+    <tr>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546621077/java-skeleton/200px-Pg_logo.png"
+             alt="Postgres" />      	
+		</td>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546621470/java-skeleton/Hibernate-logo.png"
+		   alt="Persistence" />     
+      </td>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546621576/java-skeleton/flyway-logo-tm.png"
+		   alt="Flywaydb" />     
+      </td>      
+    </tr>
+    <tr>
+    	<td></td>
+    	<td>
+    		<ul>
+    			<li>
+    				<a href="https://spring.io/projects/spring-data-jpa">Referência</a>
+    			</li>
+    		</ul>    		
+    	</td>    
+		<td>
+			<ul>
+				<li>
+					<a href="https://flywaydb.org/">Referência</a>
+				</li>
+			</ul>    		
+		</td>	
+    </td>
+  </tbody>
+</table>
+ 
+ #### Autenticação
+
+<table width="100%">
+  <tbody>
+    <tr>
+      <th align="center">Spring-security</th>
+      <th align="center">JWT</th>
+      <th align="center">Oauth2</th>      
+    </tr>
+    <tr>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546619807/java-skeleton/spring-security.png"
+             alt="Spring-security" />      	
+		</td>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546620026/java-skeleton/jwt-logo-400.png"
+		   alt="JWT" />     
+      </td>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546620358/java-skeleton/oauth2_logo.png"
+		   alt="Oauth2" />     
+      </td>      
+    </tr>    
+  </tbody>
+</table>
+
+#### Documentação e CI
+
+<table width="100%">
+  <tbody>
+    <tr>
+      <th align="center">Swagger</th>
+      <th align="center">CircleCI</th>      
+    </tr>
+    <tr>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546618916/java-skeleton/swagger-logo-300x239.png"
+             alt="Swagger" />      	
+		</td>
+      <td align="center">
+      <img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546623211/java-skeleton/circleci-logo-stacked-fb.png"
+		   alt="CircleCI" />     
+      </td>
+    </tr>
+	<tr>
+		<td>
+			<ul>
+				<li>
+					<a href="./docs/SWAGGER.md">Referência</a>
+				</li>				
+			</ul>    		
+		</td>	
+		<td></td>    
+	</td>
+  </tbody>
+</table>
+
+#### Ferramentas para desenvolvimento e produtividade
+
+<table width="100%">
+  <tbody>
+    <tr>
+      <th align="center">Lombok</th>      
+      <th align="center">MapStruct</th>      
+      <th align="center">Helpers</th>      
+    </tr>
+    <tr>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546622165/java-skeleton/255-2556400_project-lombok-logo.jpg"
+             alt="Lombok" />      	
+		</td>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546622349/java-skeleton/mapstruct.png"
+		   alt="MapStruct" />     
+      </td>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546622897/java-skeleton/package-153360_960_720.png"
+		   alt="Flywaydb" />     
+      </td>      
+    </tr>
+    <tr>
+    	<td></td>
+    	<td></td>    
+		<td>
+			<ul>
+				<li>
+					<a href="https://github.com/stleary/JSON-java">Json</a>
+				</li>
+				<li>
+					<a href="https://commons.apache.org/proper/commons-lang/">Apache Commons</a>
+				</li>
+			</ul>    		
+		</td>	
+    </td>
+  </tbody>
+</table>
+
+#### Testes
+
+<table width="100%">
+  <tbody>
+    <tr>
+      <th align="center">Junit</th>      
+      <th align="center">Mockito</th>      
+      <th align="center">Hamcrest</th>      
+    </tr>
+    <tr>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546623540/java-skeleton/junit5-logo.png"
+             alt="Junit" />      	
+		</td>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546623627/java-skeleton/mockito-logo.png"
+		   alt="Mockito" />     
+      </td>
+      <td align="center">
+      	<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546623461/java-skeleton/hamcrast.jpg"
+		   alt="Hamcrest" />     
+      </td>      
+    </tr>    
+  </tbody>
+</table>
+
+
+[nogsantoscli]:https://www.npmjs.com/package/@nogsantos/fn-cli
