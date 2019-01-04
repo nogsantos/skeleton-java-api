@@ -151,7 +151,7 @@ O projeto base utiliza as seguintes bibliotecas e frameworks
 			<td></td>
 			<td>
 				<ul>
-					<li><a href="./docks/DOCKER.md">Documentação</a></li>				
+					<li><a href="./docs/DOCKER.md">Documentação</a></li>				
 				</ul>
 			</td>
 		</tr>
