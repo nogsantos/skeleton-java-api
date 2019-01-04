@@ -1,121 +1,222 @@
 # --pkg-name
 
 [![CircleCI](https://circleci.com/gh/nogsantos/skeleton-java-api.svg?style=svg)](https://circleci.com/gh/nogsantos/skeleton-java-api)
-
-#### Importante
-
->
-> O ambiente de desenvolvimento foi configurado em sistema com base Unix, Mac e Linux, ou seja, pode haver divergência caso seja utilizado o Windows para desenvovlimento, dessa forma, caso seja extremamente necessário que se desenvolva nessa plataforma, as configurações podem variar, porém, não pude fazer os testes e nem tenho a pretenção de fazê-los para desenvolvimento em Windows.
->
-> Dessa forma, todas as configurações foram realizadas utilizando a linha de comando.
->
-
-## Setup
-
-Para preparar o ambiente de desenvolvimento, é necessário gerar as variáveis de ambiente para a conexão com o banco de dados e baixar as dependências do projeto
-
-##### Variáveis de ambiente
-
-##### Executar
-
-```shell
-$ ./setup.sh
-```
-
-Ao final do processo, além da impressão das variáveis geradas no console, o arquivo `.env` será gerado na raiz do projeto.
-
-> Ps.: As variáveis de sessão serão criadas apenas para a sessão do terminal em questão.
-
-##### Export no terminal
-
-Exportar todas as variáveis de ambiente geradas, para a sessão atual do terminal
-
-Com [Fish shell](https://fishshell.com/)
-
-```shell
-$ export (cat .env)
-```
-
-Terminal sem fish
-
-```shell
-$ export $(cat .env)
-``` 
  
-##### Dependências do projeto
+Projeto base para construções de API RestFull utilizando Spring boot versão 2 como framework principal.
 
-```shell
-$ ./gradle build
-```
+### Command Line Interface
 
-### Iniciar para desenvolvimento
+Para realizar a substituição dos parâmetros utilizados na definição do projeto, utilize [CLI](nogsantoscli) selecionando a opção `❯ Java for RestFull API ` 
 
-Executar o projeto com suporte para auto-detecção da classe principal e recarregando recursos estáticos
+![](https://res.cloudinary.com/nogsantos/image/upload/v1546616696/Screenshot_from_2019-01-04_13-39-00_msw0et.png)
+## Configurações e Setup
 
-```shell
-$ ./gradle bootRun
-```
+Todas as documentações para a configuração das bibliotecas, tarefas e setup do projeto estão disponíveis em [docs/conf](./docs/CONF.md) 
 
-### Build
+## Tecnologias
 
-Compila e testa o projeto
+O projeto base utiliza as seguintes bibliotecas e frameworks
 
-```shell
-$ ./gradlew build
-```
+#### Core e build
 
-Executar apenas os testes pelo spring boot
+<table>
+	<theader>
+		<tr>
+			<th align="center">Spring boot</th>
+			<th align="center">Gradle</th>      
+		</tr>
+	</theader>
+  	<tbody>    
+		<tr>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546619148/java-skeleton/spring-boot-2.png" alt="Spring boot" />      	
+			</td>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546619391/java-skeleton/gradle-logo-png-transparent.png" alt="Gradle" />     
+			</td>      
+		</tr>
+		<tr>			
+			<td></td>
+			<td>
+				<ul>
+					<li><a href="./docs/GRADLE.md">Referência</a></li>				
+				</ul>    		
+			</td>
+		</tr>
+	</tbody>
+</table>
 
-```shell
-$ ./gradlew test --debug
-```
+#### Banco de dados
 
-## Available Tasks
+<table>
+	<theader>
+		<tr>
+		  <th align="center">PostgreSQL</th>      
+		  <th align="center">Persistence API</th>      
+		  <th align="center">Flywaydb</th>      
+        </tr>
+	<theader>
+	<tbody>    
+    	<tr>
+      		<td align="center">
+      			<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546621077/java-skeleton/200px-Pg_logo.png" alt="Postgres" />      	
+			</td>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546621470/java-skeleton/Hibernate-logo.png" alt="Persistence" />     
+			</td>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546621576/java-skeleton/flyway-logo-tm.png" alt="Flywaydb" />     
+			</td>      
+    	</tr>
+    	<tr>
+			<td></td>
+			<td>
+				<ul>
+					<li><a href="https://spring.io/projects/spring-data-jpa">Referência</a></li>
+					<li><a href="./docs/PERSISTENCE.md">Documentação</a></li>
+				</ul>    		
+			</td>    
+			<td>
+				<ul>
+					<li><a href="https://flywaydb.org/">Referência</a></li>
+					<li><a href="./docs/FLYWAYDB.md">Documentação</a></li>
+				</ul>    		
+			</td>	
+		</tr>
+  	</tbody>
+</table>
+ 
+ #### Autenticação
 
-Todas as tarefas devem ser executadas à partir da base do projeto `./`
+<table>
+	<theader>
+		<tr>
+			<th align="center">Spring-security</th>
+			<th align="center">JWT</th>
+			<th align="center">Oauth2</th>      
+		</tr>
+	</theader>
+	<tbody>    
+		<tr>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546619807/java-skeleton/spring-security.png" alt="Spring-security" />      	
+			</td>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546620026/java-skeleton/jwt-logo-400.png" alt="JWT" />     
+			</td>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546620358/java-skeleton/oauth2_logo.png" alt="Oauth2" />     
+			</td>      
+		</tr>  
+		<tr>
+			<td></td>
+			<td>
+				<ul>
+					<li><a href="https://jwt.io/">Referência</a></li>				
+				</ul>    		
+			</td>	
+			<td></td>
+		</tr>  
+	</tbody>
+</table>
 
-### Build tasks
+#### Documentação e CI
 
-- `assemble` - Assembles the outputs of this project.
-- `bootRepackage` - Repackage existing JAR and WAR archives so that they can be executed from the command line using 'java -jar'
-- `buildDependents` - Assembles and tests this project and all projects that depend on it.
-- `buildNeeded` - Assembles and tests this project and all projects it depends on.
-- `classes` - Assembles main classes.
-- `clean` - Deletes the build directory.
-- `jar` - Assembles a jar archive containing the main classes.
-- `testClasses` - Assembles test classes.
-- `war` - Generates a war archive with all the compiled classes, the web-app content and the libraries.
+<table>
+	<theader>
+		<tr>
+			<th align="center">Swagger</th>
+			<th align="center">CircleCI</th>      
+		</tr>
+	</theader>
+	<tbody>    
+		<tr>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546618916/java-skeleton/swagger-logo-300x239.png" alt="Swagger" />      	
+			</td>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546623211/java-skeleton/circleci-logo-stacked-fb.png" alt="CircleCI" />     
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><a href="./docs/SWAGGER.md">Referência</a></li>				
+				</ul>    		
+			</td>	
+			<td></td>
+		</tr>
+	</tbody>
+</table>
 
-### Build Setup tasks
+#### Ferramentas para desenvolvimento e produtividade
 
-- `init` - Initializes a new Gradle build.
-- `wrapper` - Generates Gradle wrapper files.
+<table>
+	<theader>
+		<tr>
+			<th align="center">Lombok</th>      
+			<th align="center">MapStruct</th>      
+			<th align="center">Helpers</th>      
+		</tr>
+	</theader>
+  	<tbody>    
+		<tr>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546622165/java-skeleton/255-2556400_project-lombok-logo.jpg" alt="Lombok" />      	
+			</td>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546622349/java-skeleton/mapstruct.png" alt="MapStruct" />     
+			</td>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546622897/java-skeleton/package-153360_960_720.png" alt="Flywaydb" />     
+			</td>      
+		</tr>
+		<tr>
+			<td>
+				<ul>
+					<li><a href="./docs/HELPERS.md">Documentação</a></li>
+				</ul>
+			</td>
+			<td>
+				<ul>
+					<li><a href="./docs/HELPERS.md">Documentação</a></li>
+				</ul>
+			</td>    
+			<td>
+				<ul>
+					<li><a href="./docs/HELPERS.md">Documentação</a></li>
+					<li><a href="https://github.com/stleary/JSON-java">Json</a></li>
+					<li><a href="https://commons.apache.org/proper/commons-lang/">Apache Commons</a></li>
+				</ul>    		
+			</td>	
+		</tr>
+	</tbody>
+</table>
 
-### Documentation tasks
+#### Testes
 
-- `javadoc` - Generates Javadoc API documentation for the main source code.
+<table>
+	<theader>
+		<tr>
+			<th align="center">Junit</th>      
+			<th align="center">Mockito</th>      
+			<th align="center">Hamcrest</th>      
+		</tr>
+	</theader>
+	<tbody>
+    	<tr>
+			<td align="center">
+      			<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546623540/java-skeleton/junit5-logo.png" alt="Junit" />      	
+			</td>
+      		<td align="center">
+      			<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546623627/java-skeleton/mockito-logo.png" alt="Mockito" />     
+      		</td>
+      		<td align="center">
+      			<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546623461/java-skeleton/hamcrast.jpg" alt="Hamcrest" />     
+      		</td>      
+    	</tr>    
+  	</tbody>
+</table>
 
-### Help tasks
 
-- `buildEnvironment` - Displays all buildscript dependencies declared in root project '--pkg-name'.
-- `components` - Displays the components produced by root project '--pkg-name'. [incubating]
-- `dependencies` - Displays all dependencies declared in root project '--pkg-name'.
-- `dependencyInsight` - Displays the insight into a specific dependency in root project '--pkg-name'.
-- `dependencyManagement` - Displays the dependency management declared in root project '--pkg-name'.
-- `dependentComponents` - Displays the dependent components of components in root project '--pkg-name'. [incubating]
-- `help` - Displays a help message.
-- `model` - Displays the configuration model of root project '--pkg-name'. [incubating]
-- `projects` - Displays the sub-projects of root project '--pkg-name'.
-- `properties` - Displays the properties of root project '--pkg-name'.
-- `tasks` - Displays the tasks runnable from root project '--pkg-name'.
-
-### Verification tasks
-
-- `check` - Runs all checks.
-- `test` - Runs the unit tests.
-
-### Rules
-
-- `Pattern: clean<TaskName>`: Cleans the output files of a task.
-- `Pattern: build<ConfigurationName>`: Assembles the artifacts of a configuration.
-- `Pattern: upload<ConfigurationName>`: Assembles and uploads the artifacts belonging to a configuration.
+[nogsantoscli]:https://www.npmjs.com/package/@nogsantos/fn-cli

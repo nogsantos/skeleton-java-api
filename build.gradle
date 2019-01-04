@@ -16,11 +16,11 @@ plugins {
 }
 
 apply plugin: 'java'
+apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'net.ltgt.apt-idea'
-apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
 
 idea {
 	module {
@@ -29,7 +29,7 @@ idea {
 	}
 }
 
-group = 'me.fabricionogueira'
+group = 'me.fabricionogueira.api'
 version = '1.0.0'
 sourceCompatibility = 1.8
 
@@ -63,9 +63,9 @@ dependencies {
 	compile('io.springfox:springfox-swagger2:2.9.2')
 	compile('io.springfox:springfox-swagger-ui:2.9.2')
 	compileOnly 'org.projectlombok:lombok:1.18.4'
-	apt 'org.projectlombok:lombok:1.18.4'
+	annotationProcessor 'org.projectlombok:lombok:1.18.4'
 	compile 'org.mapstruct:mapstruct-jdk8:1.2.0.Final'
-	apt 'org.mapstruct:mapstruct-processor:1.2.0.Final'
+	annotationProcessor 'org.mapstruct:mapstruct-processor:1.2.0.Final'
 	compile group: 'org.json', name: 'json', version: '20180813'
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.8.1'
 	// Tests
@@ -86,4 +86,19 @@ sourceSets {
 
 test {
 	useJUnitPlatform()
+}
+
+bootJar {
+	mainClassName = 'me.fabricionogueira.api.ApiApplication'
+	baseName = System.getenv("APPLICATION_NAME")
+	version =  System.getenv("APPLICATION_CODE_VERSION")
+}
+
+bootWar {
+	baseName = System.getenv("APPLICATION_NAME")
+	version =  System.getenv("APPLICATION_CODE_VERSION")
+}
+
+springBoot {
+	mainClassName = 'me.fabricionogueira.api.ApiApplication'
 }

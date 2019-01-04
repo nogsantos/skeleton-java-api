@@ -2,6 +2,7 @@ spring:
   application:
     name: ${APPLICATION_NAME}
     description: ${APPLICATION_DESCRIPTION}
+    code-version: ${APPLICATION_CODE_VERSION}
     version: ${APPLICATION_VERSION}
     contact:
       name: ${CONTACT_NAME}
