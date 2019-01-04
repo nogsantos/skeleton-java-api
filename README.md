@@ -120,13 +120,14 @@ O projeto base utiliza as seguintes bibliotecas e frameworks
 	</tbody>
 </table>
 
-#### Documentação e CI
+#### Documentação, CI e Container
 
 <table>
 	<theader>
 		<tr>
 			<th align="center">Swagger</th>
 			<th align="center">CircleCI</th>      
+			<th align="center">Docker</th>      
 		</tr>
 	</theader>
 	<tbody>    
@@ -137,6 +138,9 @@ O projeto base utiliza as seguintes bibliotecas e frameworks
 			<td align="center">
 				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546623211/java-skeleton/circleci-logo-stacked-fb.png" alt="CircleCI" />     
 			</td>
+			<td align="center">
+				<img src="https://res.cloudinary.com/nogsantos/image/upload/c_scale,w_100/v1546631567/java-skeleton/docker.png" alt="Docker CE" />     
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -145,6 +149,11 @@ O projeto base utiliza as seguintes bibliotecas e frameworks
 				</ul>    		
 			</td>	
 			<td></td>
+			<td>
+				<ul>
+					<li><a href="./docks/DOCKER.md">Documentação</a></li>				
+				</ul>
+			</td>
 		</tr>
 	</tbody>
 </table>

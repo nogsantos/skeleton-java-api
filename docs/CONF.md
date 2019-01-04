@@ -1,13 +1,6 @@
 # Documentação
 
-Documentações e configurações acessar:
-
-- [Gradle](./GRADLE.md)
-- [Tomcat](./TOMCAT.md)
-- [Swagger](./SWAGGER.md)
-
 #### Importante
-
 >
 > O ambiente de desenvolvimento foi configurado em sistema com base Unix, Mac e Linux, ou seja, pode haver divergência caso seja utilizado o Windows para desenvovlimento, dessa forma, caso seja extremamente necessário que se desenvolva nessa plataforma, as configurações podem variar, porém, não pude fazer os testes e nem tenho a pretenção de fazê-los para desenvolvimento em Windows.
 >
