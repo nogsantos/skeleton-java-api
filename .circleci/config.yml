@@ -2,7 +2,6 @@ version: 2
 jobs:
   default:
     docker:
-      # specify the version you desire here
       - image: circleci/openjdk:8-jdk
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -18,12 +17,8 @@ jobs:
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "build.gradle" }}
-            # Uncomment if your build has UI components.
-            #- node-dependency-cache-{{ checksum "node_modules" }}
-            # fallback to using the latest cache if no exact match is found
             - v1-dependencies-
       - run: gradle dependencies
-      # run tests and package
       - run: ./gradlew clean test
       - run:
           name: Save test results
@@ -36,9 +31,6 @@ jobs:
       - store_artifacts:
           path: ~/junit
       - setup_remote_docker
-      - run:
-          name: Build Docker Image
-          command: ./gradlew bootRepackage -Pprod buildDocker
       - save_cache:
           paths:
             - ~/.m2
