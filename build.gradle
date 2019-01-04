@@ -16,11 +16,11 @@ plugins {
 }
 
 apply plugin: 'java'
+apply plugin: 'war'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'net.ltgt.apt-idea'
-apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
-apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
 
 idea {
 	module {
@@ -29,7 +29,7 @@ idea {
 	}
 }
 
-group = 'me.fabricionogueira'
+group = 'me.fabricionogueira.api'
 version = '1.0.0'
 sourceCompatibility = 1.8
 
@@ -86,4 +86,19 @@ sourceSets {
 
 test {
 	useJUnitPlatform()
+}
+
+bootJar {
+	mainClassName = 'me.fabricionogueira.api.ApiApplication'
+	baseName = System.getenv("APPLICATION_NAME")
+	version =  System.getenv("APPLICATION_CODE_VERSION")
+}
+
+bootWar {
+	baseName = System.getenv("APPLICATION_NAME")
+	version =  System.getenv("APPLICATION_CODE_VERSION")
+}
+
+springBoot {
+	mainClassName = 'me.fabricionogueira.api.ApiApplication'
 }
